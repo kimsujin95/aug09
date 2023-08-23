@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +21,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sujin.web.service.AdminService;
 import com.sujin.web.util.Util;
 
@@ -158,6 +164,59 @@ public class AdminController {
 	public String mail() {
 		return "admin/mail";
 	}
+
+	@PostMapping("/mail")
+	public String mail(@RequestParam Map<String, Object> map) throws EmailException {
+//		{title=메일 보내기, to=montblc@outlook.com, content=안녕}
+//		System.out.println(map);	
+//		return "foward:/mail";
+//		util.simpleMailSender(map);
+		util.htmlMailSender(map);
+		return "admin/mail";
+	}
+
+	//noticeDetail
+	@ResponseBody
+	@PostMapping("/noticeDetail")
+	public String noticeDetail(@RequestParam("nno") int nno) {
+		System.out.println(nno);
+		
+		// jackson 사용해보기
+		ObjectNode json = JsonNodeFactory.instance.objectNode();
+//		json.put("name", "조미연");
+		// 해야할 일
+		/* 1. 데이터 베이스에 물어보기 -> nno -> 본문내용 가져오기
+		 * 2. jackson에 담아주세요.
+		 * 
+		 */
+
+/*
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("bno", 123);
+		map2.put("btitle", 1234);
+		
+		ObjectMapper jsonMap = new ObjectMapper();
+		try {
+			json.put("map2", jsonMap.writeValueAsString(map2));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+*/
+		
+		json.put("content", adminService.content(nno));
+		return json.toString();
+	}
+	
+	//noticeHide
+	@ResponseBody
+	@PostMapping("/noticeHide")
+	public String noticeHide(@RequestParam("nno") int nno) {		
+		int result = adminService.noticeHide(nno);
+		ObjectNode json = JsonNodeFactory.instance.objectNode();
+		json.put("result", result);
+		return json.toString();
+	}
+	
 }
 
 
