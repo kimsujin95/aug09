@@ -21,11 +21,11 @@ public class MultiBoardController {
 	private MultiBoardService mbService;
 
 	@GetMapping("/multiboard")
-	public String multiboard(
-			@RequestParam(value = "board", required = false, defaultValue = "1") int board, 
-																					Model model) {
-		
+	public String multiboard(@RequestParam(value = "board", required = false, defaultValue = "1") int board, Model model) {
+		//화면에 보여줄 게시판 목록도 가져오겠습니다.
+		List<Map<String, Object>> boardlist = mbService.boardlist();
 		List<Map<String, Object>> list = mbService.list(board);
+		model.addAttribute("boardlist", boardlist);
 		model.addAttribute("list", list);
 		//System.out.println(list);
 		return "multiboard";
@@ -50,7 +50,7 @@ public class MultiBoardController {
 		if(session.getAttribute("mid") != null) {
 			map.put("mid", session.getAttribute("mid"));
 			mbService.mbWrite(map);//이번에는 selectKey라는 기법입니다.
-			return "redirect:/mbdetail?mbno="+map.get("mb_no");
+			return "redirect:/mbdetail?board="+ map.get("board") +"&mbno="+ map.get("mb_no");
 		} else {
 			return "redirect:/login.sik?error=login";
 		}

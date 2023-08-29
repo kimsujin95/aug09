@@ -18,4 +18,19 @@ public interface AdminDAO {
 
 	int noticeHide(int nno);
 
+	List<Map<String, Object>> setupBoardList();
+
+	int multiBoardInsert(Map<String, Object> map);
+
+	List<Map<String, Object>> memberList();
+
+	int gradeChange(Map<String, String> map);
+
+	List<Map<String, Object>> post(Map<String, Object> map);
+
+	List<Map<String, Object>> boardList();
+
+	String appendDetail(int mbno);
+
+	String contentDetail(int mbno);
 }

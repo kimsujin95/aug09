@@ -50,7 +50,12 @@
  <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-               <h1>multiboard</h1><c:choose><c:when test="${fn:length(list) gt 0 }">
+            	<c:forEach items="${boardlist}" var="l">
+            		<!--  <button onclick="location.href='${l.b_url}'">${l.b_catename}</button> -->
+            		<a href="${l.b_url }">${l.b_catename }</a> 
+            	</c:forEach>
+               <h1>multiboard</h1>
+               <c:choose><c:when test="${fn:length(list) gt 0 }">
                	<table class="table table-dark table-hover table-striped">
                		<thead>
                		<tr class="row">
@@ -62,8 +67,8 @@
                		</tr>
                		</thead>
                		<tbody><c:forEach items="${list }" var="row">
-               		<tr class="row detail" onclick="location.href='./mbdetail?mbno=${row.mb_no}'">
-               			<td class="col-1">${row.mb_no}</td>
+               		<tr class="row detail" onclick="location.href='./mbdetail?board=${param.board}&mbno=${row.mb_no}'">
+               			<td class="col-1">${row.rowNum}</td>
                			<td class="col-6 title">${row.mb_title}</td>
                			<td class="col-2">${row.m_name}</td>
                			<td class="col-2">${row.mb_date}</td>

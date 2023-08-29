@@ -34,4 +34,36 @@ public class AdminService {
 		return adminDAO.noticeHide(nno);
 	}
 
+	public List<Map<String, Object>> setupBoardList() {
+		return adminDAO.setupBoardList();
+	}
+
+	public int multiBoardInsert(Map<String, Object> map) {
+		return adminDAO.multiBoardInsert(map);
+	}
+
+	public List<Map<String, Object>> memberList() {
+		return adminDAO.memberList();
+	}
+
+	public int gradeChange(Map<String, String> map) {
+		return adminDAO.gradeChange(map);
+	}
+
+	public List<Map<String, Object>> post(Map<String, Object> map) {
+		return adminDAO.post(map);
+	}
+
+	public List<Map<String, Object>> boardList() {
+		return adminDAO.boardList();
+	}
+
+	public String appendDetail(int mbno) {
+		return adminDAO.appendDetail(mbno);
+	}
+
+	public String contentDetail(int mbno) {
+		return adminDAO.contentDetail(mbno);
+	}
+
 }
