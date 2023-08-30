@@ -90,7 +90,7 @@
 	</select>
 
 	<select id="contentDetail" parameterType="Integer" resultType="String">
-		SELECt mb_content FROM multiboard WHERE mb_no = #{mbno}
+		SELECT mb_content FROM multiboard WHERE mb_no = #{mbno}
 	</select>
 
 </mapper>

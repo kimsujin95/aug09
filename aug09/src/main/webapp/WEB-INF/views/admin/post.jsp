@@ -76,8 +76,6 @@
 					}
 				});
             }
-            
-            
 		});
 	});
 </script>
@@ -125,7 +123,7 @@
 						<td>${row.mb_read}</td>
 						<td>${row.mb_del}</td>
 					</tr>
-					<tr class="${row.mb_no } mb_detail">
+					<tr class="${row.mb_no} mb_detail">
 					</tr>
 					</c:forEach>
 				</table>

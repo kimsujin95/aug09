@@ -57,7 +57,7 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	let corona = ${corona };
+	let corona = ${corona};
 	document.querySelector(".mmddhh").innerText = corona.response.result[0].mmddhh;
 	document.querySelector(".cnt_deaths").innerText = corona.response.result[0].cnt_deaths;
 	document.querySelector(".cnt_hospitalizations").innerText = corona.response.result[0].cnt_hospitalizations;
